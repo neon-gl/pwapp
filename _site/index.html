@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="manifest" href="/manifest.json">
-    <script src="/pwabuilder-sw-register.js"></script>
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
@@ -15,6 +14,23 @@
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="img/core-img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/core-img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/core-img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/core-img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/core-img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/core-img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/core-img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/core-img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/core-img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/core-img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/core-img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/core-img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/core-img/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
 
     <!-- Core Stylesheet -->
     <link href="style.css" rel="stylesheet">
@@ -29,35 +45,25 @@
     <div id="preloader">
         <div class="colorlib-load"></div>
     </div>
-       <script>
-           let deferredPrompt = null;
+    <script>// This is the service worker with the Cache-first network
 
-window.addEventListener('beforeinstallprompt', (e) => {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-  e.preventDefault();
-  // Stash the event so it can be triggered later.
-  deferredPrompt = e;
-});
+// Add this below content to your HTML page, or add the js file to your page at the very top to register service worker
 
-async function install() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    console.log(deferredPrompt)
-    deferredPrompt.userChoice.then(function(choiceResult){
-
-      if (choiceResult.outcome === 'accepted') {
-      console.log('Your PWA has been installed');
-    } else {
-      console.log('User chose to not install your PWA');
-    }
-
-    deferredPrompt = null;
-
-    });
+// Check compatibility for the browser we're running this in
+if ("serviceWorker" in navigator) {
+  if (navigator.serviceWorker.controller) {
+    console.log("[PWA Builder] active service worker found, no need to register");
+  } else {
+    // Register the service worker
+    navigator.serviceWorker
+      .register("pwabuilder-sw.js", {
+        scope: "./"
+      })
+      .then(function (reg) {
+        console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+      });
   }
-}
-</script>
-
+}</script>
     <!-- ***** Header Area Start ***** -->
     <header class="header_area animated">
         <div class="container-fluid">
@@ -841,7 +847,7 @@ async function install() {
     <script src="js/footer-reveal.min.js"></script>
     <!-- Active JS -->
     <script src="js/active.js"></script>
-   
+
 </body>
 
 </html>
