@@ -2,7 +2,7 @@
     "lang" : "en",
     "name" : "Colorlib App - App Landing Page",
     "scope" : "/",
-    "display" : "browser",
+    "display" : "standalone",
     "start_url" : "https://pwapp.netlify.com/",
     "short_name" : "ColorlibApp",
     "theme_color" : "transparent",
