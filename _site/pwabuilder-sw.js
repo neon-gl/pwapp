@@ -1,14 +1,15 @@
-// This is the service worker with the Cache-first network
-
 const CACHE = "pwabuilder-precache";
 const precacheFiles = [
 /* Add an array of files to precache for your app */
+"/",
 "index.html",
 "/css/",
 "/fonts/",
 "/img/",
-"/js/"
+"/js/",
+"style.css"
 ];
+// This is the service worker with the Cache-first network
 
 self.addEventListener("install", function (event) {
     console.log("[PWA Builder] Install Event processing");
